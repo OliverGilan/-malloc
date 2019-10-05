@@ -1,8 +1,8 @@
 #ifndef _MY_MALLOC
 #define _MY_MALLOC
 
-#define malloc(x) mymalloc(x, _LINE_, _FILE_)
-#define free(x) myfree(x, _LINE_, _FILE_)
+#define malloc(x) mymalloc(x, __LINE__, __FILE__)
+#define free(x) myfree(x, __LINE__, __FILE__)
 
 #define static char myblock[4096]
 
