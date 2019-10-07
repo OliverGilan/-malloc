@@ -1,0 +1,18 @@
+======================================
+    Gilan & Ravikumar Test Plan
+======================================
+
+Test E:
+++++++++++++++++++++++++++++++++++++++++
+The design of this test is to purposefully 
+trip all the errors we should expect our 
+program to throwand handle. These errors 
+are outlined in the project description and 
+the test is a simple allocation and freeing 
+of variables to cause the desired errors.
+
+++++++++++++++++++++++++++++++++++++++++
+
+Test F:
+++++++++++++++++++++++++++++++++++++++++
+
