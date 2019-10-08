@@ -4,7 +4,7 @@
 #define malloc(x) mymalloc(x, __LINE__, __FILE__)
 #define free(x) myfree(x, __LINE__, __FILE__)
 
-#define static char myblock[4096]
+static char myblock[4096];
 
 void* mymalloc(int, int, char*);
 void* myfree(int, int, char*);
