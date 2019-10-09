@@ -1,7 +1,7 @@
 #include "mymalloc.h"
 
 void* mymalloc(int size, int line, char* file) {
-	int start = 1;
+	int tsize = size;
 	void* ptr = &myblock[0];
 
 	for (int i = 0; i < sizeof(myblock) - size + 1; i++) {
