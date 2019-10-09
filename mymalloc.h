@@ -7,7 +7,7 @@
 static char myblock[4096];
 
 void* mymalloc(int, int, char*);
-void myfree(int, int, char*);
+void myfree(void*, int, char*);
 
 #endif
 

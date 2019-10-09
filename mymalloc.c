@@ -45,6 +45,10 @@ void* mymalloc(int size, int line, char* file) {
 	return ptr;
 }
 
-void myfree(char* ptr, int line, char* file) {
-
+void myfree(void* ptr, int line, char* file) {
+	for (int i = (char*)ptr - myblock; i < sizeof(myblock); i++) {
+		if (myblock[i] == 'A') {
+			myblock[i] = 'B';
+		}
+	}
 }
