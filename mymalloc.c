@@ -3,8 +3,8 @@
 void* mymalloc(int size, int line, char* file) {
 	int tsize = size;
 	void* ptr = &myblock[0];
-
-	for (int i = 0; i < sizeof(myblock) - size + 1; i++) {
+	int i = 0;
+	for (i = 0; i < sizeof(myblock) - size + 1; i++) {
 		if (tsize == 0) {
 			myblock[i] = 'A';
 			break;
@@ -22,7 +22,8 @@ void* mymalloc(int size, int line, char* file) {
 		}
 		if (myblock[i] == 'B') {
 			int usable = 1;
-			for (int j = i; j < sizeof(myblock); j++) {
+			int j = 0;
+			for (j= i; j < sizeof(myblock); j++) {
 				if (myblock[i] == 'A') {
 					usable = 0;
 					break;
@@ -46,7 +47,8 @@ void* mymalloc(int size, int line, char* file) {
 }
 
 void myfree(void* ptr, int line, char* file) {
-	for (int i = (char*)ptr - myblock; i < sizeof(myblock); i++) {
+	int i = 0;
+	for (i = (char*)ptr - myblock; i < sizeof(myblock); i++) {
 		if (myblock[i] == 'A') {
 			myblock[i] = 'B';
 		}

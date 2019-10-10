@@ -1,7 +1,7 @@
-#include "mymalloc.h"
 #include <time.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include "mymalloc.h"
 
 void testA();
 void testB();
@@ -124,11 +124,11 @@ void testD(){
 }
 
 void testE(){
-    int x = 1;
-    free(x);
+    int x = 1; 
+    free(x); //Error
 
     char* p = (char*)malloc(200);
-    free(p+10);
+    free(p+10); 
 
     int* y;
     free(y);
@@ -148,18 +148,18 @@ void testF(){
     int* array = (int*)malloc(500);
     matrix[0] = array;
     array[0] = 1;
-    free(array[2]); //should generate error
+    // free(array[2]); //should generate error
     free(array);
-    free(matrix[2]); //should generate error
+    // free(matrix[2]); //should generate error
     free(matrix);
     
     int i = 0;
     int* pointer = (int*)malloc(1);
     for(i = 1; i<4096/2;i++){
-        pointer[i] = (int*)malloc(1); //shouldn't have an error
+        pointer[i] = (int*)malloc(1); //shouldn't have an error //REVISIT THIS
     }
 
-    int* overflow = (int*)malloc(1); //should cause error
+    // int* overflow = (int*)malloc(1); //should cause error
 
     for(i=4096/2-1;i>=0;i--){
         free(pointer[i]); //shouldnt have an error
