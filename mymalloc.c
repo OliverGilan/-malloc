@@ -20,15 +20,15 @@ void* mymalloc(int size, int line, char* file) {
 			tsize = size;
 			continue;
 		}
-		if (myblock[i] == 'B') {
+		if (myblock[i] == 'B') {//not sure what this block is doing...
 			int usable = 1;
 			int j = 0;
 			for (j= i; j < sizeof(myblock); j++) {
-				if (myblock[i] == 'A') {
+				if (myblock[i] == 'A') {//do you mean j?
 					usable = 0;
 					break;
 				}
-				if (myblock[i] == 'B')
+				if (myblock[i] == 'B')//do you mean j?
 					break;
 			}
 			if (usable == 0) {
