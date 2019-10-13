@@ -1,4 +1,5 @@
 #include "mymalloc.h"
+#include <stdio.h>
 
 void* mymalloc(int size, int line, char* file) {
 	int tsize = size;

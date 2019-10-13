@@ -17,18 +17,22 @@ int main(){
     while(i<100){
         tee = clock();
         testA();
+        // printf("testA done\n");
         tee = clock()-tee;
         a += ((double)tee)/CLOCKS_PER_SEC;
         tee = clock();
         testB();
+        // printf("testB done\n");
         tee = clock()-tee;
         b += ((double)tee)/CLOCKS_PER_SEC;
         tee = clock();
         testC();
+        // printf("testC done\n");
         tee = clock()-tee;
         c += ((double)tee)/CLOCKS_PER_SEC;
         tee = clock();
         testD();
+        // printf("testD done\n");
         tee = clock()-tee;
         d += ((double)tee)/CLOCKS_PER_SEC;
         i++;
@@ -45,6 +49,7 @@ void testA(){
     while(i<150){
         char* pointer = (char*)malloc(1);
         free(pointer);
+        i++;
     }
 }
 
@@ -88,6 +93,7 @@ void testC(){
     }
     while(i>0){
         free(pointers[i-1]);
+        i--;
     }
     free(pointers);
 }
@@ -107,6 +113,7 @@ void testD(){
             t=t+(k%64)+1;
             if(t>4096){
                 //DO SOMETHING
+                break;
             }
             pointers[i] = (char*)malloc((k%64)+1);
             i++; 
@@ -119,49 +126,50 @@ void testD(){
     }
     while(i>0){
         free(pointers[i-1]);
+        i--;
     }
     free(pointers);
 }
 
-void testE(){
-    int x = 1; 
-    free(x); //Error
+// void testE(){
+//     int x = 1; 
+//     free((int*)x); //Error
 
-    char* p = (char*)malloc(200);
-    free(p+10); 
+//     char* p = (char*)malloc(200);
+//     free(p+10); 
 
-    int* y;
-    free(y);
+//     int* y;
+//     free(y);
 
-    char* q = (char*)malloc(100);
-    free(q);
-    free(q);
+//     char* q = (char*)malloc(100);
+//     free(q);
+//     free(q);
 
-    char* f = (char*)malloc(4097);
-    free(f);
-    f = (char*)malloc(4090);
-    q = (char*)malloc(10);
-}
+//     char* f = (char*)malloc(4097);
+//     free(f);
+//     f = (char*)malloc(4090);
+//     q = (char*)malloc(10);
+// }
 
-void testF(){
-    int** matrix = (int**)malloc(500);
-    int* array = (int*)malloc(500);
-    matrix[0] = array;
-    array[0] = 1;
-    // free(array[2]); //should generate error
-    free(array);
-    // free(matrix[2]); //should generate error
-    free(matrix);
+// void testF(){
+//     int** matrix = (int**)malloc(500);
+//     int* array = (int*)malloc(500);
+//     matrix[0] = array;
+//     array[0] = 1;
+//     // free(array[2]); //should generate error
+//     free(array);
+//     // free(matrix[2]); //should generate error
+//     free(matrix);
     
-    int i = 0;
-    int* pointer = (int*)malloc(1);
-    for(i = 1; i<4096/2;i++){
-        pointer[i] = (int*)malloc(1); //shouldn't have an error //REVISIT THIS
-    }
+//     int i = 0;
+//     int* pointer = (int*)malloc(1);
+//     for(i = 1; i<4096/2;i++){
+//         pointer[i] = (int*)malloc(1); //shouldn't have an error //REVISIT THIS
+//     }
 
-    // int* overflow = (int*)malloc(1); //should cause error
+//     // int* overflow = (int*)malloc(1); //should cause error
 
-    for(i=4096/2-1;i>=0;i--){
-        free(pointer[i]); //shouldnt have an error
-    }
-}
+//     for(i=4096/2-1;i>=0;i--){
+//         free(pointer[i]); //shouldnt have an error
+//     }
+// }
