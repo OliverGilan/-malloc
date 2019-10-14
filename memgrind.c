@@ -11,36 +11,46 @@ void testE();
 void testF();
 
 int main(){
-    double a, b, c, d = 0;
+    double a, b, c, d, e, f = 0;
     clock_t tee;
     int i = 0;
     while(i<100){
         tee = clock();
-        // testA();
+        testA();
         // printf("testA done\n");
         tee = clock()-tee;
         a += ((double)tee)/CLOCKS_PER_SEC;
+
         tee = clock();
         testB();
         // printf("testB done\n");
         tee = clock()-tee;
         b += ((double)tee)/CLOCKS_PER_SEC;
+
         tee = clock();
-        // testC();
+        testC();
         // printf("testC done\n");
         tee = clock()-tee;
         c += ((double)tee)/CLOCKS_PER_SEC;
+
         tee = clock();
-        // testD();
+        testD();
         // printf("testD done\n");
         tee = clock()-tee;
         d += ((double)tee)/CLOCKS_PER_SEC;
+        
+        tee = clock();
+        testE();
+        // printf("testE done\n");
+        tee = clock()-tee;
+        e += ((double)tee)/CLOCKS_PER_SEC;
         i++;
     }
     printf("Test A average runtime: %f seconds\n", a/100);
     printf("Test B average runtime: %f seconds\n", b/100);
     printf("Test C average runtime: %f seconds\n", c/100);
     printf("Test D average runtime: %f seconds\n", d/100);
+    printf("Test E average runtime: %f seconds\n", e/100);
 
 }
 
@@ -131,25 +141,25 @@ void testD(){
     free(pointers);
 }
 
-// void testE(){
-//     int x = 1; 
-//     free((int*)x); //Error
+void testE(){
+    int x = 1; 
+    free((int*)x); //Error
 
-//     char* p = (char*)malloc(200);
-//     free(p+10); 
+    char* p = (char*)malloc(200);
+    free(p+10); 
 
-//     int* y;
-//     free(y);
+    int* y;
+    free(y);
 
-//     char* q = (char*)malloc(100);
-//     free(q);
-//     free(q);
+    char* q = (char*)malloc(100);
+    free(q);
+    free(q);
 
-//     char* f = (char*)malloc(4097);
-//     free(f);
-//     f = (char*)malloc(4090);
-//     q = (char*)malloc(10);
-// }
+    char* f = (char*)malloc(4097);
+    free(f);
+    f = (char*)malloc(4090);
+    q = (char*)malloc(10);
+}
 
 // void testF(){
 //     int** matrix = (int**)malloc(500);

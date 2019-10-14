@@ -67,7 +67,7 @@ void* mymalloc(int size, int line, char* file) {
 
 	}
 	if (tsize != 0) {
-		printf("Overflow Error\n");
+		printf("Overflow error: Not enough space in memory for allocation; On line %d in file \"%s\"\n", line, file);
 		return NULL;
 	}
 
@@ -81,10 +81,6 @@ void* mymalloc(int size, int line, char* file) {
 	//}
 	//printf("\n");
 
-
-
-
-
 	return ptr;
 }
 
@@ -92,12 +88,12 @@ void myfree(void* ptr, int line, char* file) {
 	int i = (char*)ptr - &myblock[0];
 	if (i < sizeof(myblock) && i >= 0) {
 		if (myblock[i - 1] != 'A' && myblock[i - 1] != 'C') {
-			printf("Invalid Pointer\n"); // for scenarios such as free(p[2])
+			printf("Invalid Pointer: Not a pointer; On line %d in file \"%s\"\n", line, file); // for scenarios such as free(p[2])
 			return;
 		}
 		for (i = (char*)ptr - &myblock[0]; i < sizeof(myblock); i++) {
 			if (myblock[i] == 'C') {
-				printf("Invalid Pointer\n"); // if ptr was already freed
+				printf("Invalid Pointer: Pointer already freed; On line %d in file \"%s\"\n", line, file); // if ptr was already freed
 				break;
 			}
 			if (myblock[i] == 'A') {
@@ -107,6 +103,6 @@ void myfree(void* ptr, int line, char* file) {
 		}
 	}
 	else {
-		printf("Invalid Pointer\n"); // if ptr is out of array bounds
+		printf("Invalid Pointer: Not an allocated pointer; On line %d in file \"%s\"\n", line, file); // if ptr is out of array bounds
 	}
 }
