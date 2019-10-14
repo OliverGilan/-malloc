@@ -25,7 +25,6 @@ void* mymalloc(int size, int line, char* file) {
 				continue;
 			}
 			myblock[i] = 'A';
-			printf("hey");
 			break;
 		}
 		if (myblock[i] == 'B') { //basically checks if the block next to a deallocated ptr (B) is occupied by another deallocated ptr (B) or an active ptr (A)
@@ -67,19 +66,6 @@ void* mymalloc(int size, int line, char* file) {
 		printf("Overflow Error\n");
 		return NULL;
 	}
-
-	int k = 0;
-	for (k = 0; k < 500; k++) {
-		if (myblock[k] != 'A' && myblock[k] != 'B') {
-			printf("0");
-			continue;
-		}
-		printf("%c", myblock[k]);
-	}
-	printf("\n");
-
-
-
 
 	return ptr;
 }
