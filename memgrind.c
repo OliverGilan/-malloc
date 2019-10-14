@@ -54,99 +54,103 @@ int main(){
 
 }
 
-void testA(){
-    int i = 0;
-    while(i<150){
-        char* pointer = (char*)malloc(1);
-        free(pointer);
-        i++;
-    }
+void testA() {
+	int i = 0;
+	while (i < 150) {
+		char* pointer = (char*)malloc(1);
+		free(pointer);
+		i++;
+	}
 }
 
-void testB(){
-    char** pointers = (char**)malloc(50*sizeof(char*));
-    int i = 0;
-    int j = 0;
-    while(j<3){
-        while(i < 50){
-            pointers[i] = (char*)malloc(1);
-            i++;
-        }
-        while(i>0){
-            free(pointers[i-1]);
-            i--;
-        }
-        j++;
-    }
-    free(pointers);
+void testB() {
+	char** pointers = (char**)malloc(60 * sizeof(char*));
+	int i = 0;
+	int j = 0;
+
+	while (j < 1) {
+		while (i < 60) {
+			pointers[i] = (char*)malloc(1);
+			i++;
+		}
+		while (i > 0) {
+			i--;
+			free(pointers[i]);
+		}
+		j++;
+	}
+	free(pointers);
 }
 
-void testC(){
-    time_t t;
-    srand((unsigned) time(&t));
+void testC() {
+	time_t t;
+	srand((unsigned)time(&t));
 
-    int m = 0;
-    char** pointers = (char**)malloc(50*sizeof(char*));
-    int i = 0;
-    while(m<50){
-        int k = rand();
-        if(k%2==0){
-            m++;
-            pointers[i] = (char*)malloc(1);
-            i++; 
-        }else{
-            if(i>0){
-                free(pointers[i-1]);
-                i--;
-            }
-        }
-    }
-    while(i>0){
-        free(pointers[i-1]);
-        i--;
-    }
-    free(pointers);
+	int m = 0;
+	char** pointers = (char**)malloc(50 * sizeof(char*));
+	int i = 0;
+	while (m < 50) {
+		int k = rand();
+		if (k % 2 == 0) {
+			m++;
+			pointers[i] = (char*)malloc(1);
+			i++;
+		}
+		else {
+			if (i > 0) {
+				free(pointers[i - 1]);
+				i--;
+			}
+		}
+	}
+	while (i > 0) {
+		free(pointers[i - 1]);
+		i--;
+	}
+	free(pointers);
 }
 
-void testD(){
-    time_t ti;
-    srand((unsigned) time(&ti));
+void testD() {
+	time_t ti;
+	srand((unsigned)time(&ti));
 
-    int m = 0;
-    int t = 0;
-    char** pointers = (char**)malloc(50*sizeof(char*));
-    int i = 0;
-    while(m<50){
-        int k = rand();
-        if(k%2==0){
-            m++;
-            t=t+(k%64)+1;
-            if(t>4096){
-                //DO SOMETHING
-                break;
-            }
-            pointers[i] = (char*)malloc((k%64)+1);
-            i++; 
-        }else{
-            if(i>0){
-                free(pointers[i-1]);
-                i--;
-            }
-        }
-    }
-    while(i>0){
-        free(pointers[i-1]);
-        i--;
-    }
-    free(pointers);
+	int m = 0;
+	int t = 0;
+	char** pointers = (char**)malloc(50 * sizeof(char*));
+	int i = 0;
+	while (m < 50) {
+		int k = rand();
+		if (k % 2 == 0) {
+			m++;
+			t = t + (k % 64) + 1;
+			if (t > 4096) {
+				//DO SOMETHING
+				break;
+			}
+			pointers[i] = (char*)malloc((k % 64) + 1);
+			i++;
+		}
+		else {
+			if (i > 0) {
+				free(pointers[i - 1]);
+				i--;
+			}
+		}
+	}
+	while (i > 0) {
+		free(pointers[i - 1]);
+		i--;
+	}
+	free(pointers);
 }
 
 void testE(){
     int x = 1; 
-    free((int*)x); //Error
+    free((int*)x);
 
     char* p = (char*)malloc(200);
     free(p+10); 
+    free(p);
 
     int* y;
     free(y);
@@ -159,6 +163,8 @@ void testE(){
     free(f);
     f = (char*)malloc(4090);
     q = (char*)malloc(10);
+    free(f);
+    free(q);
 }
 
 // void testF(){
