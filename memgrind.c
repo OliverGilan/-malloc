@@ -62,7 +62,7 @@ void testB(){
             pointers[i] = (char*)malloc(1);
             i++;
         }
-        while(i>=0){
+        while(i>0){
             free(pointers[i-1]);
             i--;
         }
