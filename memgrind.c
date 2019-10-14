@@ -16,7 +16,7 @@ int main(){
     int i = 0;
     while(i<100){
         tee = clock();
-        testA();
+        // testA();
         // printf("testA done\n");
         tee = clock()-tee;
         a += ((double)tee)/CLOCKS_PER_SEC;
@@ -26,12 +26,12 @@ int main(){
         tee = clock()-tee;
         b += ((double)tee)/CLOCKS_PER_SEC;
         tee = clock();
-        testC();
+        // testC();
         // printf("testC done\n");
         tee = clock()-tee;
         c += ((double)tee)/CLOCKS_PER_SEC;
         tee = clock();
-        testD();
+        // testD();
         // printf("testD done\n");
         tee = clock()-tee;
         d += ((double)tee)/CLOCKS_PER_SEC;

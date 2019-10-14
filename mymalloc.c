@@ -48,10 +48,16 @@ void* mymalloc(int size, int line, char* file) {
 }
 
 void myfree(void* ptr, int line, char* file) {
-	int i = 0;
-	for (i = (char*)ptr - myblock; i < sizeof(myblock); i++) {
-		if (myblock[i] == 'A') {
-			myblock[i] = 'B';
+	int i = (char*)ptr - myblock;
+	if(i < sizeof(myblock) && i>=0){
+		printf("i: %d\n", i);
+		for (i = i; i < sizeof(myblock); i++) {
+			if (myblock[i] == 'A') {
+				myblock[i] = 'B';
+				break;
+			}
 		}
+	}else{
+		printf("invalid pointer\n");
 	}
 }
