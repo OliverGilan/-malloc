@@ -8,14 +8,15 @@ void* mymalloc(int size, int line, char* file) {
 	for (i = 1; i < sizeof(myblock); i++) {
 		if (tsize == 0) { // if enough space has been found
 			int m = 0;
+			int t = 0;
 			for (m = i; m < sizeof(myblock); m++) {
-				if (myblock[m] == 'B') {
+				if (myblock[m] == 'C') {
 					break;
 				}
 				if (myblock[m] == 'A') {
 					tsize = size;
+					t = i;
 					i = m;
-					printf("%i\n", i);
 					break;
 				}
 			}
@@ -29,7 +30,7 @@ void* mymalloc(int size, int line, char* file) {
 			myblock[i] = 'A';
 			break;
 		}
-		if (myblock[i] == 'B') { //basically checks if the block next to a deallocated ptr (B) is occupied by another deallocated ptr (B) or an active ptr (A)
+		if (myblock[i] == 'C') { //basically checks if the block next to a deallocated ptr (B) is occupied by another deallocated ptr (B) or an active ptr (A)
 			int usable = 1;
 			int j = 0;
 			for (j = i; j < sizeof(myblock); j++) {
@@ -37,14 +38,14 @@ void* mymalloc(int size, int line, char* file) {
 					usable = 0;
 					break;
 				}
-				if (myblock[j] == 'B')
+				if (myblock[j] == 'C')
 					break;
 			}
 			if (usable == 0) {
 				tsize = size;
 				continue;
 			}
-			if (usable == 1) { // if the adjacent block is also a deallocated ptr, remove this 'B' ex. 000B00B -> 000000B
+			if (usable == 1) { // if the adjacent block is also a deallocated ptr, remove this 'C' ex. 000B00B -> 000000B
 				myblock[i] = '\0';
 				tsize--;
 				continue;
@@ -71,13 +72,14 @@ void* mymalloc(int size, int line, char* file) {
 
 	//int k = 0;
 	//for (k = 0; k < 1000; k++) {
-	//	if (myblock[k] != 'A' && myblock[k] != 'B') {
+	//	if (myblock[k] != 'A' && myblock[k] != 'C') {
 	//		printf("0");
 	//		continue;
 	//	}
 	//	printf("%c", myblock[k]);
 	//}
 	//printf("\n");
+
 
 
 
@@ -89,9 +91,17 @@ void myfree(void* ptr, int line, char* file) {
 
 	int i = (char*)ptr - &myblock[0];
 	if (i < sizeof(myblock) && i >= 0) {
+		if (myblock[i - 1] != 'A' && myblock[i - 1] != 'C') {
+			printf("Invalid Pointer\n"); // for scenarios such as free(p[2])
+			return;
+		}
 		for (i = (char*)ptr - &myblock[0]; i < sizeof(myblock); i++) {
+			if (myblock[i] == 'C') {
+				printf("Invalid Pointer\n"); // if ptr was already freed
+				break;
+			}
 			if (myblock[i] == 'A') {
-				myblock[i] = 'B';
+				myblock[i] = 'C';
 				break;
 			}
 		}
