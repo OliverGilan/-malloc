@@ -5,7 +5,7 @@ void* mymalloc(int size, int line, char* file) {
 	void* ptr = &myblock[1];
 	int i = 0;
 	myblock[0] = 'A';
-	for (i = 1; i < sizeof(myblock) - size + 1; i++) {
+	for (i = 1; i < sizeof(myblock); i++) {
 		if (tsize == 0) { // if enough space has been found
 			int m = 0;
 			for (m = i; m < sizeof(myblock); m++) {
@@ -14,6 +14,8 @@ void* mymalloc(int size, int line, char* file) {
 				}
 				if (myblock[m] == 'A') {
 					tsize = size;
+					i = m;
+					printf("%i\n", i);
 					break;
 				}
 			}
@@ -67,6 +69,19 @@ void* mymalloc(int size, int line, char* file) {
 		return NULL;
 	}
 
+	//int k = 0;
+	//for (k = 0; k < 1000; k++) {
+	//	if (myblock[k] != 'A' && myblock[k] != 'B') {
+	//		printf("0");
+	//		continue;
+	//	}
+	//	printf("%c", myblock[k]);
+	//}
+	//printf("\n");
+
+
+
+
 	return ptr;
 }
 
@@ -78,9 +93,6 @@ void myfree(void* ptr, int line, char* file) {
 			if (myblock[i] == 'A') {
 				myblock[i] = 'B';
 				break;
-			}
-			if (i == 2000) {
-				//printf(".");
 			}
 		}
 	}
