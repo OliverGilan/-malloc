@@ -10,7 +10,10 @@ void testD();
 void testE();
 void testF();
 
+
 int main(){
+    // char a = '\x1E';
+    // printf("%d bytes: %c\n", (int)sizeof(a), a);
     double a, b, c, d, e, f = 0;
     clock_t tee;
     int i = 0;
@@ -44,6 +47,12 @@ int main(){
         // printf("testE done\n");
         tee = clock()-tee;
         e += ((double)tee)/CLOCKS_PER_SEC;
+
+        tee = clock();
+        // testF();
+        // printf("testF done\n");
+        tee = clock()-tee;
+        f += ((double)tee)/CLOCKS_PER_SEC;
         i++;
     }
     printf("Test A average runtime: %f seconds\n", a/100);
@@ -51,7 +60,9 @@ int main(){
     printf("Test C average runtime: %f seconds\n", c/100);
     printf("Test D average runtime: %f seconds\n", d/100);
     printf("Test E average runtime: %f seconds\n", e/100);
+    printf("Test F average runtime: %f seconds\n", f/100);
 
+    return 0;
 }
 
 void testA() {
@@ -167,25 +178,36 @@ void testE(){
     free(q);
 }
 
-// void testF(){
-//     int** matrix = (int**)malloc(500);
-//     int* array = (int*)malloc(500);
-//     matrix[0] = array;
-//     array[0] = 1;
-//     // free(array[2]); //should generate error
-//     free(array);
-//     // free(matrix[2]); //should generate error
-//     free(matrix);
+void testF(){
+    int** matrix = (int**)malloc(500);
+    int* array = (int*)malloc(500);
+    matrix[0] = array;;
+    free(matrix[0]);
+    free(matrix);
     
-//     int i = 0;
-//     int* pointer = (int*)malloc(1);
-//     for(i = 1; i<4096/2;i++){
-//         pointer[i] = (int*)malloc(1); //shouldn't have an error //REVISIT THIS
-//     }
+    int* firstHalf = (int*)malloc(1000);
+    char* secondHalf = (char*)malloc(1000);
+    free(firstHalf);
+    free(secondHalf);
+    double* merged = (double*)malloc(3000);
+    free(merged);
 
-//     // int* overflow = (int*)malloc(1); //should cause error
+    char*** third = (char***)malloc(1);
+    third[0] = (char**)malloc(1);
+    third[0][0] = (char*)malloc(1);
+    free(third[0][0]);
+    free(third[0]);
+    free(third);
 
-//     for(i=4096/2-1;i>=0;i--){
-//         free(pointer[i]); //shouldnt have an error
-//     }
-// }
+    char* string = (char*)malloc(6);
+    string[0] = 'h';
+    string[1] = 'e';
+    string[2] = 'l';
+    string[3] = 'l';
+    string[4] = 'o';
+    string[5] = '\0';
+    int* number = (int*)malloc(2);
+    free(string);
+    free(number);
+
+}
