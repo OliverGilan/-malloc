@@ -49,7 +49,7 @@ int main(){
         e += ((double)tee)/CLOCKS_PER_SEC;
 
         tee = clock();
-        // testF();
+        testF();
         // printf("testF done\n");
         tee = clock()-tee;
         f += ((double)tee)/CLOCKS_PER_SEC;
@@ -185,21 +185,21 @@ void testF(){
     free(matrix[0]);
     free(matrix);
     
-    int* firstHalf = (int*)malloc(1000);
+    char* firstHalf = (char*)malloc(1000);
     char* secondHalf = (char*)malloc(1000);
     free(firstHalf);
     free(secondHalf);
     double* merged = (double*)malloc(3000);
     free(merged);
 
-    char*** third = (char***)malloc(1);
-    third[0] = (char**)malloc(1);
-    third[0][0] = (char*)malloc(1);
+    char*** third = (char***)malloc(1*sizeof(char**));
+    third[0] = (char**)malloc(1*sizeof(char*));
+    third[0][0] = (char*)malloc(1*sizeof(char));
     free(third[0][0]);
     free(third[0]);
     free(third);
 
-    char* string = (char*)malloc(6);
+    char* string = (char*)malloc(6*sizeof(char));
     string[0] = 'h';
     string[1] = 'e';
     string[2] = 'l';
