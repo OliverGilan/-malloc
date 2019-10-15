@@ -198,7 +198,7 @@ void testF() {
 	string[3] = 'l';
 	string[4] = 'o';
 	string[5] = '\0';
-	int* number = (int*)malloc(2);
+	int* number = (int*)malloc(2*sizeof(int));
 	free(string);
 	free(number);
 
