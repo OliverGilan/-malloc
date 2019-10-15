@@ -1,4 +1,6 @@
 #include <time.h>
+#include <sys/time.h>
+#include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include "mymalloc.h"
@@ -13,38 +15,45 @@ void testF();
 
 int main() {
 	double a, b, c, d, e, f = 0;
-	clock_t tee;
-	int i = 0;
+	struct timeval start, end;
+	int i = 0; 
 	while (i < 100) {
-		tee = clock();
+		gettimeofday(&start, NULL);
 		testA();
-		tee = clock() - tee;
-		a += ((double)tee) / CLOCKS_PER_SEC;
+		gettimeofday(&end, NULL);
+		a += (double)(end.tv_sec-start.tv_sec)*1000;
+		a += (double)(end.tv_usec-start.tv_usec)/1000;
 
-		tee = clock();
+		gettimeofday(&start, NULL);
 		testB();
-		tee = clock() - tee;
-		b += ((double)tee) / CLOCKS_PER_SEC;
+		gettimeofday(&end, NULL);
+		b += (double)(end.tv_sec-start.tv_sec)*1000;
+		b += (double)(end.tv_usec-start.tv_usec)/1000;
 
-		tee = clock();
+		gettimeofday(&start, NULL);
 		testC();
-		tee = clock() - tee;
-		c += ((double)tee) / CLOCKS_PER_SEC;
-
-		tee = clock();
+		gettimeofday(&end, NULL);
+		c += (double)(end.tv_sec-start.tv_sec)*1000;
+		c += (double)(end.tv_usec-start.tv_usec)/1000;
+		
+		gettimeofday(&start, NULL);
 		testD();
-		tee = clock() - tee;
-		d += ((double)tee) / CLOCKS_PER_SEC;
+		gettimeofday(&end, NULL);
+		d += (double)(end.tv_sec-start.tv_sec)*1000;
+		d += (double)(end.tv_usec-start.tv_usec)/1000;
 
-		tee = clock();
+		gettimeofday(&start, NULL);
 		testE();
-		tee = clock() - tee;
-		e += ((double)tee) / CLOCKS_PER_SEC;
+		gettimeofday(&end, NULL);
+		e += (double)(end.tv_sec-start.tv_sec)*1000;
+		e += (double)(end.tv_usec-start.tv_usec)/1000;
 
-		tee = clock();
+		gettimeofday(&start, NULL);
 		testF();
-		tee = clock() - tee;
-		f += ((double)tee) / CLOCKS_PER_SEC;
+		gettimeofday(&end, NULL);
+		f += (double)(end.tv_sec-start.tv_sec)*1000;
+		f += (double)(end.tv_usec-start.tv_usec)/1000;
+
 		i++;
 	}
 	printf("Test A average runtime: %f seconds\n", a / 100);
