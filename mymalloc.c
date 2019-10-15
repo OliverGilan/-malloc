@@ -66,20 +66,10 @@ void* mymalloc(int size, int line, char* file) {
 
 
 	}
-	if (tsize != 0) {
+	if (tsize != 0) { //not enough space for allocation
 		printf("Overflow error: Not enough space in memory for allocation; On line %d in file \"%s\"\n", line, file);
 		return NULL;
 	}
-
-	//int k = 0;
-	//for (k = 0; k < 1000; k++) {
-	//	if (myblock[k] != 'A' && myblock[k] != 'C') {
-	//		printf("0");
-	//		continue;
-	//	}
-	//	printf("%c", myblock[k]);
-	//}
-	//printf("\n");
 
 	return ptr;
 }

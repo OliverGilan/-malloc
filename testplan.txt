@@ -1,18 +1,44 @@
-======================================
-    Gilan & Ravikumar Test Plan
-======================================
+===============================================
+         Gilan & Ravikumar Test Plan
+===============================================
 
 Test E:
-++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++
 The design of this test is to purposefully 
 trip all the errors we should expect our 
-program to throwand handle. These errors 
+program to throw and handle. These errors 
 are outlined in the project description and 
 the test is a simple allocation and freeing 
 of variables to cause the desired errors.
+This is important because we want our program
+to accruately recognize and handle these errors
+and we don't know if it can do that unless we
+specifically write a test to cause those 
+errors. That's why this test was included.
 
-++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++
 
 Test F:
-++++++++++++++++++++++++++++++++++++++++
-
++++++++++++++++++++++++++++++++++++++++++++++++
+This test first allocates and frees a 2D matrix
+to make sure our malloc and freeing can handle
+such a situation. Then it allocates two 
+consequtive blocks of memory, frees them, then 
+allocates a new block of memory that merges 
+those two previously allocated blocks.
+It then does a similar test with the 2D matrix
+but instead does it with a 3D matrix to make 
+sure it can handle higher dimensions. And 
+lastly, it allocates a char array and manually
+adds characters to it to create a string. 
+The idea of these tests were to test specific 
+points of weakness in our design and make sure 
+it could handle all of them. The merging of 
+two freed spaces meant our program frees
+properly and also can allocate into freed space
+properly. The 2D and 3D matrices means our 
+program handles higher dimension allocations
+properly. And the creation of a string means
+our program can store data in the allocated
+spaces properly. That's why this test was 
+written.
