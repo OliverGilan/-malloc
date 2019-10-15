@@ -185,8 +185,8 @@ void testF(){
     free(matrix[0]);
     free(matrix);
     
-    char* firstHalf = (char*)malloc(1000);
-    char* secondHalf = (char*)malloc(1000);
+    char* firstHalf = (char*)malloc(2000);
+    char* secondHalf = (char*)malloc(2000);
     free(firstHalf);
     free(secondHalf);
     double* merged = (double*)malloc(3000);
