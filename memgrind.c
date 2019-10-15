@@ -11,58 +11,58 @@ void testE();
 void testF();
 
 
-int main(){
-    // char a = '\x1E';
-    // printf("%d bytes: %c\n", (int)sizeof(a), a);
-    double a, b, c, d, e, f = 0;
-    clock_t tee;
-    int i = 0;
-    while(i<100){
-        tee = clock();
-        testA();
-        // printf("testA done\n");
-        tee = clock()-tee;
-        a += ((double)tee)/CLOCKS_PER_SEC;
+int main() {
+	// char a = '\x1E';
+	// printf("%d bytes: %c\n", (int)sizeof(a), a);
+	double a, b, c, d, e, f = 0;
+	clock_t tee;
+	int i = 0;
+	while (i < 100) {
+		tee = clock();
+		testA();
+		// printf("testA done\n");
+		tee = clock() - tee;
+		a += ((double)tee) / CLOCKS_PER_SEC;
 
-        tee = clock();
-        testB();
-        // printf("testB done\n");
-        tee = clock()-tee;
-        b += ((double)tee)/CLOCKS_PER_SEC;
+		tee = clock();
+		testB();
+		// printf("testB done\n");
+		tee = clock() - tee;
+		b += ((double)tee) / CLOCKS_PER_SEC;
 
-        tee = clock();
-        testC();
-        // printf("testC done\n");
-        tee = clock()-tee;
-        c += ((double)tee)/CLOCKS_PER_SEC;
+		tee = clock();
+		testC();
+		// printf("testC done\n");
+		tee = clock() - tee;
+		c += ((double)tee) / CLOCKS_PER_SEC;
 
-        tee = clock();
-        testD();
-        // printf("testD done\n");
-        tee = clock()-tee;
-        d += ((double)tee)/CLOCKS_PER_SEC;
-        
-        tee = clock();
-        testE();
-        // printf("testE done\n");
-        tee = clock()-tee;
-        e += ((double)tee)/CLOCKS_PER_SEC;
+		tee = clock();
+		testD();
+		// printf("testD done\n");
+		tee = clock() - tee;
+		d += ((double)tee) / CLOCKS_PER_SEC;
 
-        tee = clock();
-        testF();
-        // printf("testF done\n");
-        tee = clock()-tee;
-        f += ((double)tee)/CLOCKS_PER_SEC;
-        i++;
-    }
-    printf("Test A average runtime: %f seconds\n", a/100);
-    printf("Test B average runtime: %f seconds\n", b/100);
-    printf("Test C average runtime: %f seconds\n", c/100);
-    printf("Test D average runtime: %f seconds\n", d/100);
-    printf("Test E average runtime: %f seconds\n", e/100);
-    printf("Test F average runtime: %f seconds\n", f/100);
+		tee = clock();
+		testE();
+		// printf("testE done\n");
+		tee = clock() - tee;
+		e += ((double)tee) / CLOCKS_PER_SEC;
 
-    return 0;
+		tee = clock();
+		testF();
+		// printf("testF done\n");
+		tee = clock() - tee;
+		f += ((double)tee) / CLOCKS_PER_SEC;
+		i++;
+	}
+	printf("Test A average runtime: %f seconds\n", a / 100);
+	printf("Test B average runtime: %f seconds\n", b / 100);
+	printf("Test C average runtime: %f seconds\n", c / 100);
+	printf("Test D average runtime: %f seconds\n", d / 100);
+	printf("Test E average runtime: %f seconds\n", e / 100);
+	printf("Test F average runtime: %f seconds\n", f / 100);
+
+	return 0;
 }
 
 void testA() {
@@ -155,59 +155,59 @@ void testD() {
 	free(pointers);
 }
 
-void testE(){
-    int x = 1; 
-    free((int*)x);
+void testE() {
+	int x = 1;
+	free((int*)x);
 
-    char* p = (char*)malloc(200);
-    free(p+10); 
-    free(p);
+	char* p = (char*)malloc(200);
+	free(p + 10);
+	free(p);
 
-    int* y;
-    free(y);
+	int* y;
+	free(y);
 
-    char* q = (char*)malloc(100);
-    free(q);
-    free(q);
+	char* q = (char*)malloc(100);
+	free(q);
+	free(q);
 
-    char* f = (char*)malloc(4097);
-    free(f);
-    f = (char*)malloc(4090);
-    q = (char*)malloc(10);
-    free(f);
-    free(q);
+	char* f = (char*)malloc(4097);
+	free(f);
+	f = (char*)malloc(4090);
+	q = (char*)malloc(10);
+	free(f);
+	free(q);
 }
 
-void testF(){
-    int** matrix = (int**)malloc(500);
-    int* array = (int*)malloc(500);
-    matrix[0] = array;;
-    free(matrix[0]);
-    free(matrix);
-    
-    char* firstHalf = (char*)malloc(1000);
-    char* secondHalf = (char*)malloc(1000);
-    free(firstHalf);
-    free(secondHalf);
-    double* merged = (double*)malloc(3000);
-    free(merged);
+void testF() {
+	int** matrix = (int**)malloc(100 * sizeof(int*));
+	int* array = (int*)malloc(100);
+	matrix[0] = array;
+	free(matrix[0]);
+	free(matrix);
 
-    char*** third = (char***)malloc(1*sizeof(char**));
-    third[0] = (char**)malloc(1*sizeof(char*));
-    third[0][0] = (char*)malloc(1*sizeof(char));
-    free(third[0][0]);
-    free(third[0]);
-    free(third);
+	char* firstHalf = (char*)malloc(1000);
+	char* secondHalf = (char*)malloc(1000);
+	free(secondHalf);
+	free(firstHalf);
+	double* merged = (double*)malloc(3000);
+	free(merged);
 
-    char* string = (char*)malloc(6*sizeof(char));
-    string[0] = 'h';
-    string[1] = 'e';
-    string[2] = 'l';
-    string[3] = 'l';
-    string[4] = 'o';
-    string[5] = '\0';
-    int* number = (int*)malloc(2);
-    free(string);
-    free(number);
+	char*** third = (char***)malloc(1 * sizeof(char**));
+	third[0] = (char**)malloc(1 * sizeof(char*));
+	third[0][0] = (char*)malloc(1 * sizeof(char));
+	free(third[0][0]);
+	free(third[0]);
+	free(third);
+
+	char* string = (char*)malloc(6 * sizeof(char));
+	string[0] = 'h';
+	string[1] = 'e';
+	string[2] = 'l';
+	string[3] = 'l';
+	string[4] = 'o';
+	string[5] = '\0';
+	int* number = (int*)malloc(2);
+	free(string);
+	free(number);
 
 }
